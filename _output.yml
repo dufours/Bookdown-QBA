@@ -3,7 +3,7 @@ bookdown::gitbook:
   config:
     toc: 
       before: |
-        <li><a href="./">QBA workshop - Exercises - Bayesian part</a></li>
+        <li><a href="./">Bayesian quantitative biases analyses</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
     download: ["pdf", "epub"]

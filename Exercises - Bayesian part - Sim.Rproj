@@ -13,6 +13,6 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: _book
+WebsitePath: C:/Users/dufours/OneDrive - Universite de Montreal/Enseignement UdM/Cours/Bias analyses - Dufour and Dohoo/Course materials/Exercises - Bayesian part - Sim
 
 SpellingDictionary: en_CA
