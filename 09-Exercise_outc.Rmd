@@ -1,0 +1,59 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 10
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Outcome misclassification 
+
+**Folder: Exercise 4 - Oucome misclassification**
+  
+Open up the `R` project for Exercise 4 (*Exercise 4 - Outcome misclassification.Rproj*).  
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). Again, we also provided complete R scripts, but try to work it out on your own first!  
+  
+We will re-investigate exercise #5 from the QBA part of the course on adjusting for misclassification of outcome, but using a Bayesian analysis.  
+  
+Exercise #5 was described as follows:  
+  
+*It is likely that you will be able to find estimates of the Se and Sp of the test for cysticercosis in the literature. Lets assume that you found Se=90% and Sp=97%*  
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Develop a latent class model that would provide an *OR* adjusted for outcome misclassification. As a first analysis, use point estimates for the Se and the Sp (i.e., use a deterministic approach). Try the value 1.0 for Se and Sp. Thus, you would now have a
+model that explicitly admit that Se and Sp of the diagnostic test is perfect. How do these results differ from the conventional logistic model?  
+  
+2. **Modify the `R` script that you have completed for Question 1**. Stick with the deterministic approach, but now use Se=0.90 and Sp=0.97. Are the results similar to those of exercise #5 from the QBA part of the course?  
+  
+3. **Modify the `R` script that you have completed for Question 2**. Now use a probabilistic approach where distributions are used to describe your knowledge about Se and Sp of the diagnostic test. For instance, in the literature you may have found that, for the Se, a distribution with mode=0.90 and 5th percentile=0.80 would be realistic. Similarly, the Sp could be described with a distribution with mode=0.97 and 5th percentile=0.90. What is you prediction (*a priori*) regarding your results? You may have to use informative priors for your unknown parameters. You will possibly have to have a long burn in period and run for many iterations, etc…   
+  
+4. **Start from the partially completed *Question 4.R* `R` script located in Question 4 folder.** Using the same data, develop a model that would allow for differential outcome misclassification (i.e., different Se and Sp values in exposed and unexposed). First, start with a deterministic approach. For instance, use Se=0.85 and Sp=0.99 in unexposed and Se=0.95 and Sp=0.95 in exposed.  
+  
+5. **Modify the `R` script that you have completed for Question 4.** Now use distributions for your bias parameters. Use the previously proposed values as modes for the distributions, and mode minus 5 percentage-points as 5th percentiles. You will probably have to use informative priors for the *quest* coefficient. You will possibly have to have a long burn in period and run for many iterations, etc…
+
+
+
+
+
+
+
+
+
+
+
+

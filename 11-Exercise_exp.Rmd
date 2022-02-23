@@ -1,0 +1,48 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 12
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Exposure misclassification 
+
+**Folder: Exercise 5 - Exposure misclassification**
+  
+Open up the `R` project for Exercise 5 (*Exercise 5 - Exposure misclassification.Rproj*).  
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). Again, we also provided complete R scripts, but try to work it out on your own first!  
+  
+We will re-investigate exercise #5 from the QBA part of the course on adjusting for misclassification of exposure, but using a Bayesian analysis. That part was described as follows:  
+  
+*It is probably very difficult to know what the Se and Sp are for the questionnaire (quest) in terms of predicting the true knowledge status of the individual. Your best estimates based on focus groups held during the development of the questionnaire are Se=0.8 and Sp=0.9.*  
+*The bias parameters are:*  
+*- Sensitivity of exposure classification: 0.80*  
+*- Specificity of exposure classification: 0.90*  
+  
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Using a Bayesian model compute a OR adjusted for exposure misclassification. First use a deterministic approach (using the bias parameters values proposed).  
+  
+2. **Modify the `R` script that you have completed for Question 1**. Now use distributions for the bias parameters using values proposed as modes, and mode plus or minus 5 percentage-points for the 95th or 5th percentile.  
+  
+3. **Modify the `R` script that you have completed for Question 1.** We will now explore the potential impact of differential misclassification of *quest*. Suppose that the *Se* of the test to measure knowledge about cysticercosis is exactly (deterministic approach) 0.90 among test+ individuals and 0.70 among test- and that the *Sp* is 0.95 among test+ and 0.85 among test-. Is the misclassification bias larger or smaller than in #1?  
+  
+4. If you have the time, **modify the `R` script that you have completed for Question 3**. Now, include some uncertainty around the estimates provided in Question 3 by adding 5th percentiles located 10 percentage-points from the proposed value (e.g., mode at 0.90, 5th percentile at 0.80). What has changed?  
+  
+ 

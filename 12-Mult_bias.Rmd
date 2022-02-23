@@ -1,0 +1,35 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 13
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Multiple biases
+Conducting independent adjustment for each bias provides information on direction and magnitude of bias, but it does not provide a final bias-adjusted point estimate with 95CI. Some biases may cancel each other out, so presenting the selection bias adjusted estimate, and then the outcome misclassification adjusted estimate, etc,  will not provide a complete picture.  
+  
+We can combine the concepts discussed in the previous sections to conduct a multiple biases analysis. Adjustements will be made sequentially. For instance, you could adjust your estimate for an outcome misclassification, and then apply a subsequent adjustment for selection bias to the misclassification bias-adjusted estimate. You will then have a misclassification bias-adjusted, selection bias-adjusted estimate and its 95CI. 
+
+When conducting a multiple biases analysis, we **need to control biases sequentially in reverse order of occurrence**. The figure below illustrates the introduction of systematic and random errors in observational studies. When controlling multiple biases, we should apply control sequentially from right to left  (i.e., misclassification, then selection, then confounding bias).  
+  
+![**Figure.** Generation of observed data from a study showing introduction of errors from values we want to know, to values observed.](Figures\sequence bias.png)
+
+  
+
+

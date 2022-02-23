@@ -1,0 +1,57 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 8
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Selection bias 
+
+**Folder: Exercise 3 - Selection bias**
+  
+Open up the `R` project for Exercise 3 (i.e., the R project file named *Exercise 3 - Selection bias.Rproj*).  
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). Again, we also provided complete R scripts, but try to work it out on your own first!  
+  
+We will re-investigate exercise #5 from the QBA part of the course on adjusting for selection bias, but using a Bayesian analysis.  
+  
+Exercise #5 was described as follows:  
+  
+*Based on some follow-up investigation of non-participants in the study, you estimate the probability of participation in individuals that neither have cysticercosis, nor know anything about it to be about 10%. You expect knowledge of cysticercosis to increase this by a factor of 3x. Actually having cysticercosis (whether they know it or not) increased participation by a factor of 2.5x. The two factors act independently on the probability of participation.*  
+  
+*Selection bias parameters were thus:*  
+*- Selection probability among diseased exposed: 0.75*  
+*- Selection probability among diseased unexposed: 0.25*  
+*- Selection probability among healthy exposed: 0.30*  
+*- Selection probability among healthy unexposed: 0.10* 
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Try to adjust the OR obtained from a conventional logistic model using the equation provided during the lecture on selection bias. Use vague priors for the intercept and the coefficient of your logistic model. As a first step, for the bias parameters use a deterministic approach (i.e., exact values) rather than prior distributions. How these results compare to that of exercise #5? What is going on?  
+  
+2. **Modify the `R` script that you have completed for Question 1**. Now assume that **selection probability among diseased unexposed is also 0.75**. For now stick with a deterministic approach (i.e., exact values) rather than prior distributions for bias parameters. Is there a selection bias in that case?  
+  
+3. **Modify the `R` script that you have completed for Question 2**. Use these same bias parameters, but now propose distributions for these. For instance, you could use the proposed selection probabilities as modes of the distributions and have the 5th or 95th percentiles fixed at -10 or +10 percentage-points from that mode. How do your results differ from that of Question 2?  
+  
+4. **Modify the `R` script that you have completed for Question 3**. If you have the time, repeat the analyses from Question 3, but with 5th or 95th percentiles at -20 or +20 percentage-points from the modes.  
+  
+
+
+
+
+
+
