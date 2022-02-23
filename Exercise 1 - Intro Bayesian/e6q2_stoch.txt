@@ -1,0 +1,47 @@
+model{
+
+#===	LIKELIHOOD	===#
+			for( i in 1 : 2161 ) {
+							
+							#RESPONSE PART
+							test[i] ~ dbern(P[i])
+							logit(P[i]) <- int + betaquest*expo_true[i] 
+							
+							#MEASUREMENT ERROR PART
+							expo_true[i] ~ dbern(Pexpo)
+							quest[i] ~ dbern(P_obs_expo[i])
+							P_obs_expo[i] <- Se*expo_true[i] + (1-Sp)*(1-expo_true[i])
+		}
+
+#===  EXTRA CALCULATION TO GET THE ADJUSTED OR ===#
+		
+			#OR ADJUSTED FOR EXPOSURE MISCLASSIFICATION
+			OR_adj_exp_mis <- exp(betaquest)
+			
+			#OR ADJUSTED FOR SELECTION BIAS AND EXPOSURE MISCLASSIFICATION
+			OR_sel <- (S_dis_unexp*S_undis_exp)/(S_dis_exp*S_undis_unexp)
+			OR_adj_exp_sel <- OR_adj_exp_mis*OR_sel
+			
+			#OR ADJUSTED FOR UNMEASURED CONFOUNDER, SELECTION BIAS AND EXPOSURE MISCLASSIFICATION
+			OR_adj_conf_exp_sel <- OR_adj_exp_sel*( (OR_ud*PU_unexp+1-PU_unexp)/(OR_ud*PU_exp+1-PU_exp) )
+
+			
+#===	PRIOR	===#		
+			int ~ dunif(-2, 2)
+			betaquest ~ dunif(-2, 2)
+			Pexpo ~ dbeta(1.0, 1.0)
+			
+      Se ~ dtrap(.6, .7, .9, 1)
+      Sp ~ dtrap(.7, .8, .95, 1)
+
+			S_dis_exp ~ dtrap(.6, .7, .8, .9)
+			S_dis_unexp ~ dtrap(.1, .2, .3, .4)
+			S_undis_exp ~ dtrap(.2, .25, .35, .4)
+			S_undis_unexp ~ dtrap(0, .05, .15, .2)
+      
+			OR_ud ~ dtrap(7, 8, 10, 11)
+			  # OR of 9 equiv. to RR of 5 (used in Stata)
+			PU_exp ~ dtrap(.45, .55, .65, .75)
+			PU_unexp ~ dtrap(.15, .20, .25, .3)
+			
+			}

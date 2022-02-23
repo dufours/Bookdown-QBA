@@ -1,0 +1,28 @@
+model{
+
+#===    LIKELIHOOD  ===#
+            for( i in 1 : 2161 ) {
+                            test[i] ~ dbern(p[i])
+                            logit(p[i]) <- int + betaquest*quest[i] + betaUC*UC[i]      #UC IS AN UNMEASURED CONFOUNDER (LATENT)
+                            
+                            UC[i] ~ dbern(Pu[i])           #THE VALUE OF UC HAS PROBABILITY Pu OF BEING 1
+                            logit(Pu[i]) <- gamma + gammaquest*quest[i]      #Pu VARIES AS FUNCTION OF THE EXPOSURE STATUS
+            }
+            
+            gamma <- log(1/PU_unexp - 1)*-1             #LINK BETWEEN gamma and PU_unexp
+            gammaquest <-  (log(1/PU_exp - 1)*-1)-gamma        #LINK BETWEEN gammaquest AND PU_exp
+
+
+#===    PRIORS  ===#        
+            int ~ dnorm(0, 0.0001)                        #FLAT PRIOR
+            betaquest ~ dnorm(0, 0.0001)  #FLAT PRIOR
+            
+            betaUC ~ dnorm(1.6094379124341,5)   #PRIOR FOR betaUC WHICH IS SIMPLY OR_ud, BUT ON THE LOG SCALE       
+            
+            PU_exp ~ dbeta(42.009,28.3393333333333)               #PRIOR FOR PREVALENCE OF THE CONFOUNDER IN THE EXPOSED INDIVIDUALS 
+            PU_unexp ~ dbeta(12.821,48.284)           #PRIOR FOR PREVALENCE OF THE CONFOUNDER IN THE UNEXPOSED INDIVIDUALS   
+
+
+#===   EXTRA CALCULATION TO GET OR(adj) ===#
+            ORquest<-exp(betaquest)
+        }
