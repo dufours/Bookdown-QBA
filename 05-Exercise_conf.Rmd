@@ -1,0 +1,50 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 6
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Unmeasured confounder 
+
+**Folder: Exercise 2 - Unmeasured confounder**
+  
+Open up the `R` project for Exercise 2 (i.e., the R project file named *Exercise 2 - Unmeasured confounder.Rproj*).  
+  
+We will re-investigate exercise #4 from the QBA part of the course on adjusting for an unmeasured confounder, but using a Bayesian analysis. This latter exercise was described as follows:  
+  
+*In this exercise, we will assume that pig may have been a confounder but for some inexplicable reason, pig ownership was not measured or not reported. From other literature / data sources you come up with estimates of the following bias parameters:*  
+*- There is (for obvious reasons) a strong association between pig ownership and risk of cysticercosis – you estimate the RR (or OR) to be approximately 5.*  
+*- There is less information about the prevalence of pig ownership among individuals who know (exposed) or don't know (unexposed) about cysticercosis. You run a small pilot study and come up with p(pig|know=0) = 20% and p(pig|know=1) = 60%*
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). Again, we also provided complete R scripts, but try to work it out on your own first! 
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Try to adjust the OR obtained from a conventional logistic model **using Lash's method**. Use vague priors for the intercept and the coefficient of your logistic model. assume that you are not 100% sure about the values that should be used for your bias parameters, so use distributions for these, rather than exact values. For instance we could assume that:  
+- Log of the unmeasured confounder-disease *OR* ($OR(ud)$) follows a normal distribution with mean of 1.6 (i.e., a OR of 5.0) and variance of 0.2 (i.e., an inverse variance of 5.0);  
+- Prevalence of confounder in exposed ($PU(exp)$): mode=0.60 and 5th percentile=0.50;  
+- Prevalence of confounder in unexposed ($PU(unexp)$): mode=0.20 and 95th percentile=0.30.  
+  
+How these results compare to the one obtained with the QBA analyses?  
+  
+2. **Start from the `R` script that you completed in Question 1.** To investigate effect of the imprecision in your bias parameters, change the normal distribution for the log of the unmeasured confounder-disease *OR*. Keep a mean of 1.6, but use a larger variance, for instance 1.0 (i.e., an inverse variance of 1.0). How is your CI affected?  
+  
+3. **Use the *Question 3 completed.R* `R` script located in Question 3 folder.** This script is already complete, run it piece by piece to see how it works and to re-investigate this bias analysis using the alternative model proposed by McCandless. Currently the script make use of the same bias parameters distributions proposed in question 1. Do you get similar results? You could also try with the bias parameters from Question 2. Note that the McCandless model could easily be expanded to add effect measure modification (i.e., an interaction term between exposure and confounder). Using that expanded model, you could then report effect of exposure by strata of the confounder.  
+  
+
+

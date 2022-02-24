@@ -1,0 +1,59 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 14
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Multiple biases 
+
+**Folder: Exercise 6 - Multiple biases**
+  
+Open up the `R` project for Exercise 6 (*Exercise 6 - Multiple biases.Rproj*).  
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). Again, we also provided complete R scripts, but try to work it out on your own first!  
+  
+We will re-investigate exercise #7 from the QBA part of the course on adjusting for multiple biases, but using a Bayesian analysis. This part was described as follows:  
+  
+*Using the observed study data we will adjust for unmeasured confounding, misclassification of exposure, and selection bias. Use the following information to set up your bias parameters.*
+  
+- UNMEASURED CONFOUNDER:  
+  - Log odds ratio between confounder and disease = 1.6 (equivalent to OR of 5.0) with variance of 0.2  
+  - Prevalence of confounder in exposed: mode=0.60, 5th percentile=0.50  
+  - Prevalence of confounder in unexposed: mode=0.20 95th percentile=0.30  
+    
+- EXPOSURE MISCLASSIFICATION:  
+  - Sensitivity of exposure classification: Mode=0.80, 5th percentile=0.75  
+  - Specificity of exposure classification: Mode=0.90, 5th percentile =0.85  
+  
+- SELECTION BIAS:  
+  - Selection proportion in diseased exposed: Mode=0.75, 5th=0.70  
+  - Selection proportion in diseased unexposed: Mode=0.25, 95th=0.30  
+  - Selection proportion in healthy exposed: Mode=0.30, 95th=0.35  
+  - Selection proportion in healthy unexposed: Mode=0.10, 95th=0.15  
+    
+
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Using a Bayesian model compute an *OR* adjusted for unmeasured confounding, misclassification of exposure, and selection bias. In this case, in which order will you have to organize your biases adjustments? First use a deterministic approach (using the bias parameters values proposed, but ignoring the provided 5th and 95th percentiles or any other measures of spread of the distributions).  
+  
+2. **Modify the `R` script that you have completed for Question 1**. Now use a stochastic approach using distributions for all bias parameters.  
+  
+
+  
+ 

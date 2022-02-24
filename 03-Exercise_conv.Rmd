@@ -1,0 +1,41 @@
+---
+title: "QBA workshop - Exercises - Bayesian part"
+author: Simon Dufour (Professor - Université de Montréal)
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+biblio-style: apalike
+link-citations: yes
+description: Chapitre 4
+output: html_document
+---
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+# Exercise - Logistic regression 
+
+**Folder: Exercise 1 - Intro Bayesian**
+  
+Open up the `R` project for Exercise 1 (i.e., the R project file named *Exercise 1 - Intro Bayesian.Rproj*).   
+  
+In the Question 1 folder, you will find a partially completed `R` script named *Question 1.R*. To answer the following questions, try to complete the missing parts (they are highlighted by a **#TO COMPLETE#** comment). We also provided complete R scripts, but try to work it out on your own first! 
+  
+This exercise is based on the study data set (*cyst_bias_study.csv*; n=2,161) with imperfect measurement of both cysticercosis (*test*) and knowledge (*quest*). For question 4, we also provided a smaller version of that data set where we randomly picked 60 observations, it is named *cyst_bias_study_reduced.csv*. 
+  
+1. **Start from the partially completed *Question 1.R* `R` script located in Question 1 folder.** Use this script as a starting point to compute the crude association between *quest* and *test* using a logistic regression model estimated with a Bayesian analysis. **Initially, use flat priors for your parameters.** Make sure Markov chains’ behaviours are acceptable (i.e., ESS, autocorrelation plots) and that convergence is obtained (i.e., trace plot). How these results compare to those of the unadjusted $OR$ computed using a frequentist approach (i.e., OR=0.47; 95%CI=0.37, 0.60)?  
+  
+2. **Start from the `R` script that you completed in Question 1.** Run the same Bayesian logistic model, but this time use a prior distribution for *quest* coefficient that would give equal probability on the log odds scale to values between odds ratio ranging from 0.05 to 20. With such a distribution, you are explicitly saying that, *a priori*, you do not think the odds ratio could be very extreme, but that all intermediate values are possible. **Hint: it is just the prior distributions that need to be modified in two places; 1) when creating your `R` objects and 2) in the model's text file.** How are your results modified?  
+  
+3. **Again, start from the `R` script that you completed for Question 1 or Question 2.** Let go crazy a bit. For instance, you could believe that knowledge does not prevent the disease, but rather will increase odds of cysticercosis. Let say you are very convinced, *a priori*, that the most probable value for the $OR$ is 2.0 with relatively little variance in that distribution. Pick a distribution that would represent that prior knowledge. How are your results modified?  
+  
+4. If you have the time... **Again, you could modify some of your preceding `R` scripts.** To appraise the effect of priors *vs.* sample size, work on similar analyses, but this time use the *cyst_bias_study_reduced.csv* data set, which only have 60 observations (compared to 2,161 observations for the complete data set). Run a logistic regression model of the effect of *quest* on *test*, using vague prior distributions. Then run the same model, but with the prior distributions that you used in Question 3. Is the effect of the informative priors more important now?   
+

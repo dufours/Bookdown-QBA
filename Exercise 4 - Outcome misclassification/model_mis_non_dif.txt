@@ -1,0 +1,19 @@
+model{
+
+#===	LIKELIHOOD	===#
+			for( i in 1 : 2161 ) {
+							test[i] ~ dbern(P_obs[i])
+							P_obs[i] <- P_true[i]*Se+(1-P_true[i])*(1-Sp)	#MEASUREMENT ERROR PART
+							logit(P_true[i]) <- int + betaquest*quest[i]  #RESPONSE PART
+			}
+
+#===   EXTRA CALCULATION TO GET OR ===#
+			ORquest <- exp(betaquest)
+			
+#===	PRIOR	===#		
+			int ~ dunif(-2, 2)		#PRIOR INTERCEPT 
+			betaquest ~ dunif(-2, 2)	#PRIOR COEFFICIENT
+			
+			Se ~ dbeta(42.573,5.61922222222222)		    #PRIOR FOR SENSITIVITY
+			Sp ~ dbeta(53.581,2.62621649484537)		    #PRIOR FOR SPECIFICITY
+			}

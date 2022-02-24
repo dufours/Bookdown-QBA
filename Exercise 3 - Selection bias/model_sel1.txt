@@ -1,0 +1,25 @@
+model{
+
+#===	LIKELIHOOD	===#
+			for( i in 1 : 2161 ) {
+							test[i] ~ dbern(p[i])
+							logit(p[i]) <- int + betaquest*quest[i]  
+			}
+
+#===  EXTRA CALCULATION TO COMPUTE OR_sel ===#
+			OR_sel <- (S_dis_unexp*S_undis_exp)/(S_dis_exp*S_undis_unexp)
+			
+#===  EXTRA CALCULATION TO GET OR_biased and OR_adj ===#
+			OR_biased <- exp(betaquest)
+			OR_adj <- OR_biased*OR_sel
+			
+#===	PRIORS	===#		
+			int ~ dnorm(0, 0.0001)		                #FLAT PRIOR
+			betaquest ~ dnorm(0, 0.0001)	#FLAT PRIOR
+		
+			S_dis_exp <- 0.75		              #VALUE FOR SELECTION PROBABILITY IN D+E+ INDIVIDUALS 
+			S_dis_unexp <- 0.75		          #VALUE FOR SELECTION PROBABILITY IN D+E- INDIVIDUALS  
+			S_undis_exp <- 0.3		            #VALUE FOR SELECTION PROBABILITY IN D-E+ INDIVIDUALS 
+			S_undis_unexp <- 0.1		          #VALUE FOR SELECTION PROBABILITY IN D-E- INDIVIDUALS 
+
+		}

@@ -1,0 +1,23 @@
+model{
+
+#===	LIKELIHOOD	===#
+			for( i in 1 : 2161 ) {
+							test[i] ~ dbern(p[i])
+							logit(p[i]) <- int + betaquest*quest[i]  
+			}
+
+#===  EXTRA CALCULATION TO GET OR_biased and OR_adj ===#
+			OR_biased <- exp(betaquest)
+			OR_adj <- OR_biased*( (OR_ud*PU_unexp+1-PU_unexp)/(OR_ud*PU_exp+1-PU_exp) )
+			
+#===	PRIORS	===#		
+			int ~ dnorm(0, 0.0001)		                #FLAT PRIOR
+			betaquest ~ dnorm(0, 0.0001)	#FLAT PRIOR
+			
+			log_OR_ud ~ dnorm(1.6094379124341,1)   #PRIOR FOR log_OR_ud		
+			OR_ud <- exp(log_OR_ud)	                                       #LINK OR_ud TO THE LOG_OR_UD
+			
+			PU_exp ~ dbeta(42.009,28.3393333333333)		       #PRIOR FOR PREVALENCE OF THE CONFOUNDER IN THE EXPOSED INDIVIDUALS 
+			PU_unexp ~ dbeta(12.821,48.284)		     #PRIOR FOR PREVALENCE OF THE CONFOUNDER IN THE UNEXPOSED INDIVIDUALS 	
+
+		}
